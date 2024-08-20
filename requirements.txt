@@ -3,8 +3,6 @@ fastapi[all]==0.109.0
 uvicorn[standard]==0.27.0
 gunicorn==21.2.0
 Flask==2.3.2
-uvicorn==0.23.0
-waha-python==1.0.0
 psycopg2-binary==2.9.7
 SQLAlchemy==2.0.20
 docker==6.1.3
