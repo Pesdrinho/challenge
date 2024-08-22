@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Message Collector</title>
+</head>
+<body>
+    <h1>WhatsApp Message Collector</h1>
+    
+    <form action="{{ url_for('start_session') }}" method="POST">
+        <button type="submit">Iniciar Sessão no WhatsApp</button>
+    </form>
+    
+    <form action="{{ url_for('restart_session') }}" method="POST">
+        <button type="submit">Reiniciar Sessão</button>
+    </form>
+    
+    <form action="{{ url_for('create_group') }}" method="GET">
+        <button type="submit">Criar Grupo</button>
+    </form>
+
+    <hr>
+
+    <form method="POST">
+        <label for="chat_id">Chat ID:</label><br>
+        <input type="text" id="chat_id" name="chat_id" required><br><br>
+        <label for="limit">Limite de Mensagens:</label><br>
+        <input type="number" id="limit" name="limit" value="10" required><br><br>
+        <input type="submit" value="Coletar Mensagens">
+    </form>
+
+    {% if messages %}
+        <h2>Mensagens Coletadas:</h2>
+        <ul>
+            {% for message in messages %}
+                <li><strong>{{ message['from'] }}:</strong> {{ message['body'] }} <em>{{ message['timestamp'] }}</em></li>
+            {% endfor %}
+        </ul>
+
+        <form action="{{ url_for('save_messages') }}" method="POST">
+            <input type="hidden" name="messages" value="{{ messages }}">
+            <button type="submit">Salvar Mensagens</button>
+        </form>
+    {% endif %}
+
+    {% if success_message %}
+        <p style="color:green;">{{ success_message }}</p>
+    {% endif %}
+
+    {% if error_message %}
+        <p style="color:red;">{{ error_message }}</p>
+    {% endif %}
+</body>
+</html>

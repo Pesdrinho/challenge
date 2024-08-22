@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp QR Code</title>
+</head>
+<body>
+    <h1>Escaneie o QR Code para Iniciar a Sessão</h1>
+    <img src="data:image/png;base64,{{ qr_code | b64encode }}" alt="QR Code">
+
+    <form action="{{ url_for('back_to_home') }}" method="POST">
+        <button type="submit">Já escaneei o QRCode</button>
+    </form>
+</body>
+</html>

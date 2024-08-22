@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Grupo no WhatsApp</title>
+</head>
+<body>
+    <h1>Criar Grupo no WhatsApp</h1>
+    <form method="POST">
+        <label for="group_name">Nome do Grupo:</label><br>
+        <input type="text" id="group_name" name="group_name" required><br><br>
+        <label for="participants">Participantes (IDs separados por vírgula):</label><br>
+        <input type="text" id="participants" name="participants" required><br><br>
+        <input type="submit" value="Criar">
+    </form>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>
