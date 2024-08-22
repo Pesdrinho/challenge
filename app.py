@@ -4,6 +4,7 @@ from datetime import datetime
 import requests
 import time
 import base64
+from asgiref.wsgi import WsgiToAsgi
 
 app = Flask(__name__)
 
@@ -269,5 +270,8 @@ def save_messages():
     else:
         return render_template('index.html', error_message="Nenhuma mensagem para salvar.")
 
+asgi_app = WsgiToAsgi(app)
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    import uvicorn
+    uvicorn.run(asgi_app, host="localhost", port=8000)
