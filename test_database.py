@@ -1,5 +1,6 @@
 import psycopg2
 from datetime import datetime
+import os
 
 #  Dados de exemplo para inserir na tabela
 messages = [
@@ -9,7 +10,13 @@ messages = [
 
 try:
     # Connect to your postgres DB
-    conn = psycopg2.connect("dbname=whatsapp_db user=postgres password=9090")
+    conn = psycopg2.connect(
+    dbname=os.getenv("DB_NAME"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    host=os.getenv("DB_HOST"),
+    port=os.getenv("DB_PORT")
+        )
 
     # Open a cursor to perform database operations
     cur = conn.cursor()

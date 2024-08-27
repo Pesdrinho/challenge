@@ -6,6 +6,8 @@ import time
 import base64
 from asgiref.wsgi import WsgiToAsgi
 
+import os
+
 app = Flask(__name__)
 
 # Filtro customizado para codificar em base64
@@ -60,7 +62,13 @@ def get_messages(chat_id, limit=10, download_media=False):
 def store_messages_in_db(messages):
     try:
         # Conecta ao banco de dados PostgreSQL
-        conn = psycopg2.connect("dbname=whatsapp_db user=postgres password=9090")
+        conn = psycopg2.connect(
+        dbname=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        host=os.getenv("DB_HOST"),
+        port=os.getenv("DB_PORT")
+        )
         cur = conn.cursor()
 
         # Insere as mensagens na tabela MESSAGES
